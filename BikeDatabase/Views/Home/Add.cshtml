@@ -1,0 +1,55 @@
+﻿@model Bike
+
+<h2>New Bike</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Make">Make</label>
+        <input asp-for="Make" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Model">Model</label>
+        <input asp-for="Model" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BikeSizeId">Bike Size:</label>
+        <select asp-for="BikeSizeId" class="form-control" asp-items="@(new SelectList(ViewBag.BikeSizes, "BikeSizeId"))">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BikeTypeId">Bike Type:</label>
+        <select asp-for="BikeTypeId" class="form-control" asp-items="@(new SelectList(ViewBag.BikeTypes, "BikeTypeId", "Type"))">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GearNumberId">Gear Number:</label>
+        <select asp-for="GearNumberId" class="form-control" asp-items="@(new SelectList(ViewBag.GearNumbers, "GearNumberId", "Gear"))">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BikeColorId">Bike Color:</label>
+        <select asp-for="BikeColorId" class="form-control" asp-items="@(new SelectList(ViewBag.BikeColors, "BikeColorId", "Color"))">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TireSizeId">Tire Size:</label>
+        <select asp-for="TireSizeId" class="form-control" asp-items="@(new SelectList(ViewBag.TireSizes, "TireSizeId", "Tire"))">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>

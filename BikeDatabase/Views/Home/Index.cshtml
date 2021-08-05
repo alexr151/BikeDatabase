@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Bike>
+
+@{ 
+    ViewBag.Title = "Bike Inventory";
+}
+
+<h2>Bike List</h2>
+
+<div class="row">
+    <div class="col-sm-2">
+        <form asp-action="Filter" method="post">
+            <div class="form-group">
+                <label>Bike Size:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.BikeSizes, "BikeSizeId", "Size", ViewBag.Filters.BikeSizeId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Gear Number:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.GearNumbers, "GearNumberId", "Gear", ViewBag.Filters.GearNumberId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Bike Color:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.BikeColors, "BikeColorId", "Color", ViewBag.Filters.BikeColorId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Bike Type:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Priorities, "BikeTypeId", "Type", ViewBag.Filters.BIkeTypeId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tire Size:</label>
+                <select name="filter" class="form-control" asp-items="@(new SelectList(ViewBag.Priorities, "TireSizeId", "Tire", ViewBag.Filters.TireSizeId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+        </form>
+    </div>
+
+    <div class="col-sm-10">
+
+        <a asp-controller="Bike" asp-action="Add">Add Bike</a>
+
+
+
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Bike Size</th>
+                    <th>Gear Ratio</th>
+                    <th>Color</th>
+                    <th>Type</th>
+                    <th>Tire Size</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var bike in Model)
+                {
+                    <tr>
+                        <td>@bike.Make</td>
+                        <td>@bike.Model</td>
+                        <td>@bike.BikeSize.Size</td>
+                        <td>@bike.GearNumber.Gear</td>
+                        <td>@bike.BikeColor.Color</td>
+                        <td>@bike.BikeType.Type</td>
+                        <td>@bike.TireSize.Tire</td>
+                        <td>
+                            <a asp-controller="Bike" asp-action="Edit" asp-route-id="@bike.BikeId">Edit</a>
+                            <a asp-controller="Bike" asp-action="Delete" asp-route-id="@bike.BikeId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
